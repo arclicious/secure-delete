@@ -28,7 +28,10 @@ async def delete(file,dir):
                 for i in range(250000):
                     f.write(chr(randbelow(127)))
                 f.close()
-                remove(filename)
+                try:
+                    remove(filename)
+                except:
+                    print("Sorry, {} ({}) could not be deleted.".format(filename,index))
             except:
                 print("Running coroutine to delete {}...".format(filename))
                 await delete(None,filename)
