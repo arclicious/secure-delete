@@ -12,7 +12,7 @@ async def delete(file,dir):
         print("Opening file...")
         f = open(file,"w")
         print("Opened file, overwriting...")
-        for i in range(250000 * path.getsize(file)):
+        for i in range(2500000):
             f.write(chr(randbelow(127)))
         f.close()
         print("Overwritten, deleting...")
@@ -25,13 +25,10 @@ async def delete(file,dir):
             filename = path.join(dir,filename)
             try:
                 f = open(filename,"w")
-                for i in range(250000):
+                for i in range(2500000):
                     f.write(chr(randbelow(127)))
                 f.close()
-                try:
-                    remove(filename)
-                except:
-                    print("Sorry, {} ({}) could not be deleted.".format(filename,index))
+                remove(filename)
             except:
                 print("Running coroutine to delete {}...".format(filename))
                 await delete(None,filename)
